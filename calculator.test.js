@@ -1,4 +1,5 @@
 import { calculator } from "./calculator.js"
+import { expect, jest, test } from '@jest/globals';
 
 test("add should return an addition when two numbers are entered", () => {
     const number1 = 2;
@@ -36,9 +37,11 @@ test("divide should return an error message when attempting to divide by 0", () 
 });
 
 test("multiplyByRandom calculator should return a random multiply when a number is entered", () => {
+    jest.spyOn(global.Math, "random").mockReturnValue(4);
     const number1 = 8;
     const expectResult = calculator.multiplyByRandom(number1);
     expect(!Number.isNaN(expectResult)).toBe(true);
+    expect(expectResult).toBe(32);
 });
 
 test("multiplyByRandom should return a error message when parameter is a non digit string", () => {
